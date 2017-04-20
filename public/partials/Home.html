@@ -1,41 +1,16 @@
-<html>
+<h1>Blog Home Page</h1>
 
-<head>
-    <title>BloggingApp</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-    <script src="app.js"></script>
-    <script src="BlogApp.js"></script>
+<p>
+    <a href="/#/add-blog">Add a Blog</a>
+</p>
 
-    <style>
-        table, th, td {
-            border: 1px solid grey;
-            border-collapse: collapse;
-            padding: 5px;
-        }
-
-            table tr:nth-child(odd) {
-                background-color: #f2f2f2;
-            }
-
-            table tr:nth-child(even) {
-                /*background-color: #ffffff;<*/
-            }
-    </style>
-
-</head>
-
-<body>
-
-    <div ng-app="app" ng-controller="BlogApp">
-        <p><a href="#ViewBlog">View Blogs</a></p>
-        <p><a href="#Home">Home</a></p>
-
-
-
-        <h2> {{message}} </h2>
-
-            </div>
-</body>
-
-</html>
+<ul>
+    <li ng-repeat='blog in blogs'>
+        <a href="/#/blog/{{blog._id}}">
+            {{movie.title}}
+        </a>
+        <a href="/#/blog/delete/{{blog._id}}">
+            <i class="glyphicon glyphicon-remove"></i>
+        </a>
+    </li>
+</ul>
