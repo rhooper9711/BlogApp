@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var monk = require('monk');
-var db = monk('localhost:27017/moviemania');
+var db = monk('localhost:27017/blogs');
 
 router.get('/', function (req, res) {
     var collection = db.get('blogs');
