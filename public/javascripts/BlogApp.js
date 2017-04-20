@@ -1,3 +1,4 @@
+
 var app = angular.module('blogApp', ['ngResource', 'ngRoute']);
 
 app.config(['$routeProvider', function ($routeProvider) {
@@ -15,11 +16,11 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'DeleteBlogCtrl'
         })
         .when('/ViewBlogs', {
-            templateUrl: 'ViewBlogs.html',
+            templateUrl: 'partials/ViewBlogs.html',
             controller: 'BlogController'
         })
         .otherwise({
-            redirectTo: 'Home.html'
+            redirectTo: '/'
         });
 }]);
 
@@ -56,9 +57,4 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
             });
         }
     }]);
-
-
-
-
-
 
