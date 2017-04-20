@@ -1,3 +1,4 @@
+
 var app = angular.module('blogApp', ['ngResource', 'ngRoute']);
 
 app.config(['$routeProvider', function ($routeProvider) {
@@ -56,9 +57,4 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
             });
         }
     }]);
-
-
-
-
-
 
