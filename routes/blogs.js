@@ -32,12 +32,13 @@ router.delete('/:id', function (req, res) {
     });
 });
 
+
 router.post('/', function (req, res) {
     var collection = db.get('blogs');
     collection.insert({
         title: req.body.title,
-        description: req.body.description,
-        by: req.body.author
+        posts: req.body.posts,
+        author: req.body.author
     }, function (err, blogs) {
         if (err) throw err;
 

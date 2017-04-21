@@ -5,11 +5,11 @@
 </p>
 
 <ul>
-    <li ng-repeat='title in blogs'>
-        <a href="/#/blog/{{blogs._id}}">
+    <li ng-repeat='blogs in blogs'>
+        <a href="/#/blogs/{{blogs._id}}">
             {{blogs.title}}
         </a>
-        <a href="/#/blog/delete/{{blogs._id}}">
+        <a href="/#/blogs/delete/{{blogs._id}}">
             <i class="glyphicon glyphicon-remove"></i>
         </a>
     </li>
