@@ -2,12 +2,32 @@
 <html>
 <h1> Available Blogs</h1>
 <a href="/#/"> home</a>
+
 <ul>
-    <li ng-repeat="blogPost in blog.posts">
-       {{ blogPost.heading }}
-       <p>id</p>
+    <li ng-repeat="posts in blogs.posts">
+       {{posts.heading }} <br>
+       {{posts.date}} <br>
+       {{posts.body}}
     </li>
+    <br>
 </ul>
+<h1>Add a Post</h1>
+
+<form>
+    <div class="form-group">
+        <label>Date</label>
+        <textarea class="form-control" ng-model="blogs.posts.date"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Heading</label>
+        <textarea class="form-control" ng-model="blogs.posts.heading"></textarea>
+    </div>
+        <div class="form-group">
+        <label>Say Anything</label>
+        <textarea class="form-control" ng-model="blogs.posts.body"></textarea>
+    </div>
+    <input type="button" class="btn btn-primary" value="Save" ng-click="save()"></input>	
+</form>
 	</body>
 </html>
 

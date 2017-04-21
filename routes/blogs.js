@@ -46,5 +46,20 @@ router.post('/', function (req, res) {
     });
 });
 
+
+router.post('/:id', function (req, res) {
+    var collection = db.get('blogs');
+    collection.insert({
+        title: req.body.posts.title,
+        heading: req.body.posts.heading,
+        date: req.body.posts.date,
+        body: req.body.posts.body
+    }, function (err, blogs) {
+        if (err) throw err;
+
+        res.json(blogs);
+    });
+});
+
 module.exports = router;
 
