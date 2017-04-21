@@ -15,8 +15,12 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'partials/blog-delete.html',
             controller: 'DeleteBlogsCtrl'
         })
-        .when('/ViewBlogs', {
+        .when('/blogs/:id', {
             templateUrl: 'partials/ViewBlogs.html',
+            controller: 'BlogController'
+        })
+        .when('/add-post', {
+            templateUrl: 'partials/blogPost-form.html',
             controller: 'BlogController'
         })
         .otherwise({
@@ -54,6 +58,20 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
         $scope.delete = function () {
             Blogs.delete({ id: $routeParams.id }, function (blogs) {
                 $location.path('/');
+            });
+        }
+    }]);
+
+    app.controller('BlogController', ['$scope', '$resource', '$routeParams', '$location',
+    function ($scope, $resource, $routeParams, $location) {
+       var Blogs = $resource('/api/blogs/:id');
+        Blogs.get({ id: $routeParams.id }, function (blogs) {
+            $scope.blogs = blogs;
+        })
+        $scope.save = function () {
+            var Blogs = $resource('/api/blogs');
+            Blogs.save($scope.blogs, function () {
+                $location.path('/blogs/:id');
             });
         }
     }]);
