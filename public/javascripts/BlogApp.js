@@ -62,7 +62,7 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
         }
     }]);
 
-    app.controller('BlogController', ['$scope', '$resource', '$routeParams', '$location',
+app.controller('BlogController', ['$scope', '$resource', '$routeParams', '$location',
     function ($scope, $resource, $routeParams, $location) {
        var Blogs = $resource('/api/blogs/:id');
         Blogs.get({ id: $routeParams.id }, function (blogs) {
