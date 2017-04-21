@@ -4,13 +4,17 @@
     <a href="/#/add-blog">Add a Blog</a>
 </p>
 
+<p>
+    <a href="/#/ViewBlogs">View all Blogs</a>
+</p>
+
 <ul>
-    <li ng-repeat='title in blogs'>
+    <li ng-repeat='blogs in blogs'>
         <a href="/#/blog/{{blogs._id}}">
             {{blogs.title}}
         </a>
         <a href="/#/blog/delete/{{blogs._id}}">
             <i class="glyphicon glyphicon-remove"></i>
-        </a>
+        </a> 
     </li>
 </ul>

@@ -13,7 +13,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/blogs/delete/:id', {
             templateUrl: 'partials/blog-delete.html',
-            controller: 'DeleteBlogCtrl'
+            controller: 'DeleteBlogsCtrl'
         })
         .when('/ViewBlogs', {
             templateUrl: 'partials/ViewBlogs.html',
