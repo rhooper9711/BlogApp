@@ -37,8 +37,10 @@ router.post('/', function (req, res) {
     var collection = db.get('blogs');
     collection.insert({
         title: req.body.title,
-        posts: req.body.posts,
-        author: req.body.author
+        posts: [req.body.posts],
+        author: req.body.author,
+        rating: 0,
+        ratingCount: 0
     }, function (err, blogs) {
         if (err) throw err;
 
@@ -49,7 +51,7 @@ router.post('/', function (req, res) {
 
 router.post('/:id', function (req, res) {
     var collection = db.get('blogs');
-    collection.update({
+    collection.id.update({
         $push: { posts: {
         heading: req.body.heading,
         date: req.body.date,
