@@ -16,7 +16,7 @@
 
 <h2>Previous Posts</h2>
 <ul>
-    <li ng-repeat="posts in blogs.posts track by $index">
+    <li ng-repeat="posts in blogs.posts">
         {{posts.heading }} <a href="/#/blogs/delete/{{blogs._id}}/{{posts._id}}">
             <i class="glyphicon glyphicon-remove"></i>
         </a> <br>

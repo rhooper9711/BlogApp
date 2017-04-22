@@ -55,7 +55,6 @@ router.post('/:id', function (req, res) {
     collection.update({ _id: req.params.id},
      {
         $push: { posts: {
-        _id: "i+1",
         heading: req.body.heading,
         date: req.body.date,
         body: req.body.body
