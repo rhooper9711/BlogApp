@@ -19,10 +19,6 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'partials/ViewBlogs.html',
             controller: 'BlogController'
         })
-        .when('/add-post', {
-            templateUrl: 'partials/blogPost-form.html',
-            controller: 'BlogController'
-        })
         .otherwise({
             redirectTo: '/'
         });
