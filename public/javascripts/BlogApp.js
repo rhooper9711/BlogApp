@@ -63,8 +63,8 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
         }
     }]);
 
-    app.controller('BlogController', ['$scope', '$resource', '$routeParams', '$location',
-    function ($scope, $resource, $routeParams, $location) {
+    app.controller('BlogController', ['$scope', '$resource', '$routeParams', '$location', '$route',
+    function ($scope, $resource, $routeParams, $location, $route) {
        var Blogs = $resource('/api/blogs/:id');
         Blogs.get({ id: $routeParams.id }, function (blogs) {
             $scope.blogs = blogs;
@@ -72,22 +72,23 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
         $scope.add = function () {
             Blogs.save({ id: $routeParams.id }, $scope.posts, function (blogs) {
                 $location.path('/blogs/'+$routeParams.id);
+                $route.reload();
             });
         }
 
-        var rBlog = $resource('/api/blogs/:id/');
-        var newRating = rBlog.rating + $scope.rating;
-        var newCount = rBlog.ratingCount + 1;
+        var newRating = Blogs.rating + $scope.rating;
+        var newCount = Blogs.ratingCount + 1;
 
         $scope.saveRating = function () {
-            $scope.newAverage = newRating / newCount;
+            Blogs.put({ id: $routeParams.id}, function (blogs) {$scope.newAverage = newRating / newCount;
+        })
         }
     }]);
 
 app.controller('DeletePostCtrl', ['$scope', '$resource', '$routeParams', '$location',
     function ($scope, $resource, $location, $routeParams) {
         var Blogs = $resource('/api/blogs/:id/:postid');
-        Blogs.get({ id: $routeParams.id, postid: $routeParams.postid}, function (blogs) {
+        Blogs.query({ id: $routeParams.id, postid: $routeParams.postid}, function (blogs) {
          $scope.blogs = blogs;
         })
         $scope.deletePost = function () {
