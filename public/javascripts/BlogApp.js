@@ -1,4 +1,5 @@
 
+
 var app = angular.module('blogApp', ['ngResource', 'ngRoute']);
 
 app.config(['$routeProvider', function ($routeProvider) {
@@ -62,16 +63,15 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
         }
     }]);
 
-app.controller('BlogController', ['$scope', '$resource', '$routeParams', '$location',
+    app.controller('BlogController', ['$scope', '$resource', '$routeParams', '$location',
     function ($scope, $resource, $routeParams, $location) {
        var Blogs = $resource('/api/blogs/:id');
         Blogs.get({ id: $routeParams.id }, function (blogs) {
             $scope.blogs = blogs;
         })
-        $scope.save = function () {
-            var Blogs = $resource('/api/blogs');
-            Blogs.save($scope.blogs, function () {
-                $location.path('/blogs/:id');
+        $scope.add = function () {
+            Blogs.save($scope.posts, function (blogs) {
+                $location.path('/blogs/'+$routeParams.id);
             });
         }
     }]);
