@@ -70,7 +70,7 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
             $scope.blogs = blogs;
         })
         $scope.add = function () {
-            Blogs.save($scope.posts, function (blogs) {
+            Blogs.save({ id: $routeParams.id }, $scope.posts, function (blogs) {
                 $location.path('/blogs/'+$routeParams.id);
             });
         }
