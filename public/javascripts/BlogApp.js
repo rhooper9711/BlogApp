@@ -74,6 +74,14 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
                 $location.path('/blogs/'+$routeParams.id);
             });
         }
+
+        var rBlog = $resource('/api/blogs/:id/');
+        var newRating = rBlog.rating + $scope.rating;
+        var newCount = rBlog.ratingCount + 1;
+
+        $scope.saveRating = function () {
+            $scope.newAverage = newRating / newCount;
+        }
     }]);
 
 app.controller('DeletePostCtrl', ['$scope', '$resource', '$routeParams', '$location',

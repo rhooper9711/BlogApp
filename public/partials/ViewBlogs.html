@@ -2,9 +2,10 @@
 <html>
 <a href="/#/"> Home</a>
 <h1>{{blogs.title}}</h1> <br />
-<p>This Blogs Rating {{blogs.rating}}</p> <br/>
+<!--<p>This Blogs Rating: {{blogs.rating / blogs.ratingCount }}</p> <br/>-->
+<p>This Blogs Rating: {{blogs.rating}}</p>
 <p>Rate this blog</p>
-<select>
+<select ng-model="blogs.rating">
     <option value=5>5</option>
     <option value=4>4</option>
     <option value=3>3</option>
@@ -15,7 +16,7 @@
 
 <h2>Previous Posts</h2>
 <ul>
-    <li ng-repeat="posts in blogs.posts">
+    <li ng-repeat="posts in blogs.posts track by $index">
         {{posts.heading }} <a href="/#/blogs/delete/{{blogs._id}}/{{posts._id}}">
             <i class="glyphicon glyphicon-remove"></i>
         </a> <br>

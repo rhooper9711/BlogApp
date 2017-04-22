@@ -38,7 +38,10 @@ router.post('/', function (req, res) {
     collection.insert({
         title: req.body.title,
         posts: [],
-        author: req.body.author
+        author: req.body.author,
+        rating: 0,
+        ratingCount: 0
+
     }, function (err, blogs) {
         if (err) throw err;
 
