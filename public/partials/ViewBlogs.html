@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
-<h1> Available Blogs</h1>
-<a href="/#/"> home</a>
+<a href="/#/"> Home</a>
+<h1>{{blogs.title}}</h1> <br />
+<p>This Blogs Rating {{blogs.rating}}</p> <br/>
+<p>Rate this blog</p>
+<select>
+    <option value=5>5</option>
+    <option value=4>4</option>
+    <option value=3>3</option>
+    <option value=2>2</option>
+    <option value=1>1</option>
+</select>
+<input type="button" class="btn btn-primary" value="Save Rating" ng-click="saveRating()"></input><br/> <br/>
 
+<h2>Previous Posts</h2>
 <ul>
     <li ng-repeat="posts in blogs.posts">
-       {{posts.heading }} <br>
-       {{posts.date}} <br>
-       {{posts.body}}
+        {{blogs.posts.heading }} <br>
+        {{blogs.posts.date}} <br>
+        {{blogs.posts.body}}
     </li>
     <br>
 </ul>
-<h1>Add a Post</h1>
+<h2>Add a Post</h2>
 
 <form>
     <div class="form-group">
