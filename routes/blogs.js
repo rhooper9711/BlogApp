@@ -37,7 +37,7 @@ router.post('/', function (req, res) {
     var collection = db.get('blogs');
     collection.insert({
         title: req.body.title,
-        posts: req.body.posts,
+        posts: [],
         author: req.body.author
     }, function (err, blogs) {
         if (err) throw err;
@@ -49,8 +49,10 @@ router.post('/', function (req, res) {
 
 router.post('/:id', function (req, res) {
     var collection = db.get('blogs');
-    collection.update({
+    collection.update({ _id: req.params.id},
+     {
         $push: { posts: {
+        _id: "i+1",
         heading: req.body.heading,
         date: req.body.date,
         body: req.body.body
@@ -63,7 +65,7 @@ router.post('/:id', function (req, res) {
 
 router.get('/:id/:postid', function (req, res) {
     var collection = db.get('blogs');
-    collection.findOne({ _id: req.params.id }, function (err, blogs) {
+    collection.findOne({ _id: req.params.id }, {posts: {_id: reqparams.id}}, function (err, blogs) {
         if (err) throw err;
 
         res.json(blogs);
@@ -72,7 +74,9 @@ router.get('/:id/:postid', function (req, res) {
 
 router.delete('/:id/:postid', function (req, res) {
     var collection = db.get('blogs');
-    collection.update({ $pull: {posts: {_id: req.params.postid }}, function (err, blogs) {
+    collection.update({ _id: req.params.id},
+    { $pull: {posts: {_id: req.params.postid }},
+     function (err, blogs) {
         if (err) throw err;
 
         res.json(blogs);
