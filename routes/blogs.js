@@ -49,16 +49,37 @@ router.post('/', function (req, res) {
 
 router.post('/:id', function (req, res) {
     var collection = db.get('blogs');
-    collection.insert({
-        heading: req.body.posts.heading,
-        date: req.body.posts.date,
-        body: req.body.posts.body
-    }, function (err, blogs) {
+    collection.update({
+        $push: { posts: {
+        heading: req.body.heading,
+        date: req.body.date,
+        body: req.body.body
+    }}, function (err, blogs) {
+        if (err) throw err;
+
+        res.json(blogs);
+    }});
+});
+
+router.get('/:id/:postid', function (req, res) {
+    var collection = db.get('blogs');
+    collection.findOne({ _id: req.params.id }, function (err, blogs) {
         if (err) throw err;
 
         res.json(blogs);
     });
 });
+
+router.delete('/:id/:postid', function (req, res) {
+    var collection = db.get('blogs');
+    collection.update({ $pull: {posts: {_id: req.params.postid }}, function (err, blogs) {
+        if (err) throw err;
+
+        res.json(blogs);
+    }
+    });
+});
+
 
 module.exports = router;
 

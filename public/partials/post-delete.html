@@ -1,0 +1,16 @@
+<h1>Delete Post Entry</h1>
+<p>
+    Are you sure you want to delete this Post?
+</p>
+
+
+<ul>
+    <li>Title: {{blogs.posts.heading}}</li>
+    <li>Date: {{blogs.posts.date}}</li>
+
+</ul>
+
+<input type="button" value="Yes, Delete" class="btn btn-danger" ng-click="deletePost()" />
+
+<a class="btn btn-default" href="/#/blogs/{{Blogs._id}}">No, Go Back</a>
+

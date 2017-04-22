@@ -16,10 +16,12 @@
 <h2>Previous Posts</h2>
 <ul>
     <li ng-repeat="posts in blogs.posts">
-        {{blogs.posts.heading }} <br>
-        {{blogs.posts.date}} <br>
-        {{blogs.posts.body}}
-    </li>
+        {{posts.heading }} <a href="/#/blogs/delete/{{blogs._id}}/{{posts._id}}">
+            <i class="glyphicon glyphicon-remove"></i>
+        </a> <br>
+        {{posts.date}} <br>
+        {{posts.body}}
+        </li>
     <br>
 </ul>
 <h2>Add a Post</h2>
