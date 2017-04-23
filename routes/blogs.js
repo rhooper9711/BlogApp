@@ -40,7 +40,7 @@ router.post('/', function (req, res) {
         title: req.body.title,
         posts: [],
         author: req.body.author,
-        rating: 0,
+        rating: [],
         ratingCount: 0
 
     }, function (err, blogs) {
@@ -69,14 +69,15 @@ router.post('/:id', function (req, res) {
 
 router.put('/:id', function (req, res) {
     var collection = db.get('blogs');
-    collection.update({ _id: req.params.id},
+    collection.findOneAndUpdate({ _id: req.params.id},
      {
-        $push: { rating: {
-    }}, function (err, blogs) {
+        $inc: {ratingCount: 1},
+        $push: { rating: parseInt(req.body.rating) } 
+    }, function (err, blogs) {
         if (err) throw err;
 
         res.json(blogs);
-    }});
+    });
 });
 
 router.get('/:id/:postid', function (req, res) {
