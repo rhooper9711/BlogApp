@@ -53,10 +53,11 @@ router.post('/', function (req, res) {
 
 router.post('/:id', function (req, res) {
     var collection = db.get('blogs');
+
     collection.findOneAndUpdate({ _id: req.params.id},
      {
         $push: { posts: {
-       // $inc: { id: 1},
+       // $inc: { postid: 1},
         heading: req.body.heading,
         date: req.body.date,
         body: req.body.body
