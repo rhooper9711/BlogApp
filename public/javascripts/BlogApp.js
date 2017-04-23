@@ -79,12 +79,21 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
       //  var newCount = Blogs.ratingCount + 1;
 
         $scope.saveRating = function () {
-            console.log("working?");
             Blogs.update({ id: $routeParams.id}, $scope.rating, function (blogs) {
                 $location.path('/blogs/'+$routeParams.id);
                 $route.reload();
         })
         }
+
+        $scope.averageRating = function () {
+            var totalRating = 0;
+            for (var i = 0; i < $scope.rating.length; i++) {
+                totalRating = totalRating + $scope.rating[i];
+            }
+            var averageRating = totalRating / $scope.ratingCount;
+            return averageRating;
+        }
+
     }]);
 
 app.controller('DeletePostCtrl', ['$scope', '$resource', '$routeParams', '$location',

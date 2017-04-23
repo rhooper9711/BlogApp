@@ -2,8 +2,7 @@
 <html>
 <a href="/#/"> Home</a>
 <h1>{{blogs.title}}</h1> <br />
-<!--<p>This Blogs Rating: {{blogs.rating / blogs.ratingCount }}</p> <br/>-->
-<p>This Blogs Rating: {{blogs.rating}}</p>
+<p>This Blogs Rating: {{ averageRating() }}</p>
 <p>Rate this blog</p>
 <select ng-model="rating.rating">
     <option value=5>5</option>
