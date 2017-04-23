@@ -63,7 +63,9 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
 
     app.controller('BlogController', ['$scope', '$resource', '$routeParams', '$location', '$route',
     function ($scope, $resource, $routeParams, $location, $route) {
-       var Blogs = $resource('/api/blogs/:id');
+       var Blogs = $resource('/api/blogs/:id', null, {
+           'update': { method:'PUT' 
+        }});
         Blogs.get({ id: $routeParams.id }, function (blogs) {
             $scope.blogs = blogs;
         })
@@ -73,12 +75,14 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
                 $route.reload();
             });
         }
-
-        var newRating = Blogs.rating + $scope.rating;
-        var newCount = Blogs.ratingCount + 1;
+      //  var newRating = Blogs.rating + $scope.rating;
+      //  var newCount = Blogs.ratingCount + 1;
 
         $scope.saveRating = function () {
-            Blogs.put({ id: $routeParams.id}, function (blogs) {$scope.newAverage = newRating / newCount;
+            console.log("working?");
+            Blogs.update({ id: $routeParams.id}, $scope.rating, function (blogs) {
+                $location.path('/blogs/'+$routeParams.id);
+                $route.reload();
         })
         }
     }]);
