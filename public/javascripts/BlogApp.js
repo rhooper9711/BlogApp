@@ -100,12 +100,12 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
     }]);
 
 app.controller('DeletePostCtrl', ['$scope', '$resource', '$routeParams', '$location',
-    function ($scope, $resource, $location, $routeParams) {
+    function ($scope, $resource, $routeParams, $location) {
         var Blogs = $resource('/api/blogs/:id/:postid');
-        Blogs.query({ id: $routeParams.id, postid: $routeParams.postid}, function (blogs) {
+        Blogs.get({ id: $routeParams.id, postid: $routeParams.postid}, function (blogs) {
          $scope.blogs = blogs;
         })
-        $scope.deletePost = function () {
+        $scope.deletePost = function () { console.log("hello");
             Blogs.delete({ id: $routeParams.id, postid: $routeParams.postid }, function (blogs) {
                 $location.path('/blogs/'+$routeParams.id);
             });
