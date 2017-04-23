@@ -86,10 +86,13 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
         }
 
         $scope.averageRating = function () {
+
+            var ratingArray = $scope.blogs.rating;
             var totalRating = 0;
-            for (var i = 0; i < $scope.rating.length; i++) {
-                totalRating = totalRating + $scope.rating[i];
+            for (var i = 0; i < ratingArray.length; i++) {
+                totalRating = totalRating + ratingArray[i];
             }
+            totalRating = totalRating + $scope.rating;
             var averageRating = totalRating / $scope.ratingCount;
             return averageRating;
         }
