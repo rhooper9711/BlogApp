@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+<body>
 <a href="/#/"> Home</a>
-<h1>{{blogs.title}}</h1> <br />
+<h1>{{blogs.title}}</h1>
+<h3>By: {{blogs.author}}</h3><br />
 <p>This Blogs Rating: {{ averageRating() }}</p>
 <p>Rate this blog</p>
 <select ng-model="rating.rating">
-    <option value=5>5</option>
+    <option value=5 selected >5</option>
     <option value=4>4</option>
     <option value=3>3</option>
     <option value=2>2</option>

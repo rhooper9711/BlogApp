@@ -73,6 +73,7 @@ router.put('/:id', function (req, res) {
      {
         $inc: {ratingCount: 1},
         $push: { rating: parseInt(req.body.rating) } 
+     //   $set: { averageRating: parseInt(req.body.averageRating.averageRating) } 
     }, function (err, blogs) {
         if (err) throw err;
 

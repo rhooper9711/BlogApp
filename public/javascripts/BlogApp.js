@@ -75,26 +75,31 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
                 $route.reload();
             });
         }
-      //  var newRating = Blogs.rating + $scope.rating;
-      //  var newCount = Blogs.ratingCount + 1;
-
-        $scope.saveRating = function () {
-            Blogs.update({ id: $routeParams.id}, $scope.rating, function (blogs) {
-                $location.path('/blogs/'+$routeParams.id);
-                $route.reload();
-        })
-        }
 
         $scope.averageRating = function () {
-
+            console.log($scope.blogs.rating)
             var ratingArray = $scope.blogs.rating;
             var totalRating = 0;
             for (var i = 0; i < ratingArray.length; i++) {
                 totalRating = totalRating + ratingArray[i];
             }
-            totalRating = totalRating + $scope.rating;
-            var averageRating = totalRating / $scope.ratingCount;
+            console.log("after adding the new rating " + totalRating)
+            if (totalRating != 0) {
+                var averageRating = totalRating / $scope.blogs.ratingCount;
+                console.log("count " + $scope.blogs.ratingCount);
+            } else {
+                averageRating = 0
+            }
+            $scope.averageRating.averageRating = averageRating;
             return averageRating;
+        }
+
+        $scope.saveRating = function () {
+           // Blogs.update({ id: $routeParams.id }, $scope.rating, $scope.averageRating.averageRating, function (blogs) {
+            Blogs.update({ id: $routeParams.id }, $scope.rating, function (blogs) {
+                $location.path('/blogs/'+$routeParams.id);
+                $route.reload();
+        })
         }
 
     }]);
