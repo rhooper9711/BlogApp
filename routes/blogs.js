@@ -55,13 +55,16 @@ router.post('/:id', function (req, res) {
     var collection = db.get('blogs');
 
     collection.findOneAndUpdate({ _id: req.params.id},
-     {
+    {
         $push: { posts: {
-       // $inc: { postid: 1},
         heading: req.body.heading,
         date: req.body.date,
-        body: req.body.body
-    }}}, function (err, blogs) {
+        body: req.body.body,
+        postid: 0
+    }}},
+         {
+        $inc: { "posts.$.postid": 1}
+        } , function (err, blogs) {
         if (err) throw err;
         res.json(blogs);
     });
@@ -72,8 +75,8 @@ router.put('/:id', function (req, res) {
     collection.findOneAndUpdate({ _id: req.params.id},
      {
         $inc: {ratingCount: 1},
-        $push: { rating: parseInt(req.body.rating) } 
-     //   $set: { averageRating: parseInt(req.body.averageRating.averageRating) } 
+        $push: { rating: parseInt(req.body.rating) }, 
+        $set: { averageRating: parseFloat(req.body.averageRating) } 
     }, function (err, blogs) {
         if (err) throw err;
 
@@ -83,7 +86,7 @@ router.put('/:id', function (req, res) {
 
 router.get('/:id/:postid', function (req, res) {
     var collection = db.get('blogs');
-    collection.findOne({ _id: req.params.id }, {posts: {postid: req.params.postid}}, function (err, blogs) {
+    collection.findOne({ _id: req.params.id }, {"posts.$.postid": req.params.postid}, function (err, blogs) {
         if (err) throw err;
 
         res.json(blogs);

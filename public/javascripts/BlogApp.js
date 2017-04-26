@@ -77,26 +77,25 @@ app.controller('DeleteBlogsCtrl', ['$scope', '$resource', '$location', '$routePa
         }
 
         $scope.averageRating = function () {
-            console.log($scope.blogs.rating)
+            //console.log($scope.blogs.rating);
             var ratingArray = $scope.blogs.rating;
             var totalRating = 0;
             for (var i = 0; i < ratingArray.length; i++) {
                 totalRating = totalRating + ratingArray[i];
             }
-            console.log("after adding the new rating " + totalRating)
             if (totalRating != 0) {
                 var averageRating = totalRating / $scope.blogs.ratingCount;
-                console.log("count " + $scope.blogs.ratingCount);
             } else {
                 averageRating = 0
             }
-            $scope.averageRating.averageRating = averageRating;
             return averageRating;
         }
 
         $scope.saveRating = function () {
-           // Blogs.update({ id: $routeParams.id }, $scope.rating, $scope.averageRating.averageRating, function (blogs) {
-            Blogs.update({ id: $routeParams.id }, $scope.rating, function (blogs) {
+            $scope.rating.averageRating = $scope.averageRating();
+            console.log("average rate"+ $scope.rating.averageRating);
+         Blogs.update({ id: $routeParams.id }, $scope.rating, function (blogs) {
+          //  Blogs.update({ id: $routeParams.id }, $scope.rating, function (blogs) {
                 $location.path('/blogs/'+$routeParams.id);
                 $route.reload();
         })
@@ -108,7 +107,8 @@ app.controller('DeletePostCtrl', ['$scope', '$resource', '$routeParams', '$locat
     function ($scope, $resource, $routeParams, $location) {
         var Blogs = $resource('/api/blogs/:id/:postid');
         Blogs.get({ id: $routeParams.id, postid: $routeParams.postid}, function (blogs) {
-         $scope.blogs = blogs;
+            console.log("blogs"+blogs.posts.heading);
+         $scope.singlePost = blogs;
         })
         $scope.deletePost = function () { console.log("hello");
             Blogs.delete({ id: $routeParams.id, postid: $routeParams.postid }, function (blogs) {
